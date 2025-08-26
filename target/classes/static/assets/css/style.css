@@ -138,7 +138,127 @@
     background-image: url("./static/assets/images/mercadoLivreLogo.svg");
 }
 
-/* Magalu */
-.imagem-container.magalu::after {
-    background-image: url('logos/magalu.png');
+.page-item.active .page-link {
+    background-color: #ec60fd !important;
+    border-color: #a22aaf !important; /* Opcional: para mudar a cor da borda também */
+    color: white !important; /* Opcional: para garantir que o texto fique legível em um fundo escuro */
+}
+
+/* ========================= Estilos do Rodapé ========================= */
+
+.footer-container {
+    background-color: #24262b; /* Um cinza bem escuro, quase preto */
+    padding: 70px 0;
+    color: #bbbbbb; /* Cor do texto principal do rodapé */
+}
+
+.footer-col {
+    padding: 0 15px;
+    margin-bottom: 30px;
+}
+
+.footer-logo {
+    width: 80px; /* Tamanho da sua logo no rodapé */
+    margin-bottom: 20px;
+}
+
+.footer-col h4 {
+    font-size: 18px;
+    color: #ffffff;
+    text-transform: capitalize;
+    margin-bottom: 35px;
+    font-weight: 500;
+    position: relative;
+}
+
+/* Linha decorativa abaixo dos títulos */
+.footer-col h4::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -10px;
+    background-color: #ec60fd; /* Cor rosa/roxa da sua marca */
+    height: 2px;
+    box-sizing: border-box;
+    width: 50px;
+}
+
+.footer-col ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-col ul li:not(:last-child) {
+    margin-bottom: 10px;
+}
+
+.footer-col ul li a {
+    font-size: 16px;
+    text-transform: capitalize;
+    color: #bbbbbb;
+    text-decoration: none;
+    font-weight: 300;
+    display: block;
+    transition: all 0.3s ease;
+}
+
+/* Efeito ao passar o mouse nos links */
+.footer-col ul li a:hover {
+    color: #ffffff;
+    padding-left: 8px;
+}
+
+.social-links a {
+    display: inline-block;
+    height: 40px;
+    width: 40px;
+    background-color: rgba(255, 255, 255, 0.2);
+    margin: 0 10px 10px 0;
+    text-align: center;
+    line-height: 40px;
+    border-radius: 50%;
+    color: #ffffff;
+    transition: all 0.5s ease;
+}
+
+/* Efeito ao passar o mouse nos ícones sociais */
+.social-links a:hover {
+    color: #24262b;
+    background-color: #ffffff;
+}
+
+.copyright-text {
+    text-align: center;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    margin-top: 40px;
+}
+
+/* Ajustes para telas menores (celulares) */
+@media(max-width: 767px) {
+    .footer-col {
+        width: 100%;
+        text-align: center;
+    }
+    .footer-col h4::before {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+}
+.social-links{
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
+.social-links a{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.social-links img{
+    width: 25px;
+    height: 25px;
+    justify-content: center;
+    align-items: center;
+    object-fit: contain;
 }
