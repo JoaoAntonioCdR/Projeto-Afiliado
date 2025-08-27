@@ -32,7 +32,7 @@ function renderizarCards(lista) {
             precoOriginalHtml = `<p id="preco-original" class="card-text">Preco Original: ${produto.precoOriginal}</p>`;
         }
         const card = `
-            <div class="col card-produto">
+            <div class="card-produto">
                 <div class="card">
                     <div class="card-image">
                         <img src="${produto.imagemUrl}" class="card-img-top ${produto.plataforma}" alt="Imagem do Produto">
@@ -83,10 +83,6 @@ async function inicializarPesquisa() {
     // Uma pesquisa global exigiria uma nova lógica de backend.
 }
 
-function pesquisarProdutos(event) {
-    // Implementação de pesquisa futura...
-    console.log("Função de pesquisa a ser implementada.");
-}
 
 // Carga inicial do site
 carregarProdutos(0);
