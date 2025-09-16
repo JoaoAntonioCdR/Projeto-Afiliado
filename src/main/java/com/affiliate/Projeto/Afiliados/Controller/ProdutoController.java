@@ -11,9 +11,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+
 import java.util.List;
 
-@CrossOrigin(origins = "*") // Permite acesso de qualquer origem
 @RestController
 @RequestMapping("/api")
 public class ProdutoController {
@@ -29,6 +29,11 @@ public class ProdutoController {
 
         Pageable pageable = PageRequest.of(page, size);
         return produtoService.findAll(pageable);
+    }
+
+    @GetMapping("/all")
+    public List<Produto> findAll() {
+        return produtoService.findAll();
     }
 
     @PostMapping

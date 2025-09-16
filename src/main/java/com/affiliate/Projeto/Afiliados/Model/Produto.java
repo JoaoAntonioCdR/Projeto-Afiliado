@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import java.math.BigDecimal;
 
 @Entity
-@Table(name = "produto")
+@Table(name = "produtos")
 public class Produto {
 
 
@@ -21,6 +21,7 @@ public class Produto {
     private String categoria;
     private String imagemUrl;
     private String plataforma;
+    private String descricao;
 
     @Column(unique = true, nullable = false)
     private String linkAfiliado;
@@ -28,7 +29,7 @@ public class Produto {
     public Produto() {
     }
 
-    public Produto(String titulo, BigDecimal precoOriginal, BigDecimal precoAVista, BigDecimal parcelamentoPreco, String categoria, String parcelamentoTexto,String plataforma, String linkAfiliado, String imagemUrl) {
+    public Produto(String titulo, BigDecimal precoOriginal, BigDecimal precoAVista, BigDecimal parcelamentoPreco, String categoria, String parcelamentoTexto,String plataforma, String linkAfiliado, String imagemUrl, String descricao) {
         this.titulo = titulo;
         this.precoOriginal = precoOriginal;
         this.precoAVista = precoAVista;
@@ -38,6 +39,7 @@ public class Produto {
         this.categoria = categoria;
         this.linkAfiliado = linkAfiliado;
         this.imagemUrl = imagemUrl;
+        this.descricao = descricao;
     }
 
     public String getTitulo() {
@@ -118,5 +120,13 @@ public class Produto {
 
     public void setLinkAfiliado(String linkAfiliado) {
         this.linkAfiliado = linkAfiliado;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 }

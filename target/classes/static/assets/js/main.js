@@ -1,4 +1,4 @@
-const urlApi = 'http://localhost:8080/api';
+const urlApi = '/api';
 let todosOsProdutosParaPesquisa = []; // Guarda produtos para a função de pesquisa
 
 // Função principal que busca os produtos de uma página específica
@@ -29,7 +29,9 @@ function renderizarCards(lista) {
         const produto = new ProdutoModel(produtoData);
         let precoOriginalHtml = '';
         if (produto.precoOriginal > 0) {
-            precoOriginalHtml = `<p id="preco-original" class="card-text">Preco Original: ${produto.precoOriginal}</p>`;
+            precoOriginalHtml = `<div class="card-preco-original">
+                        <p class="preco-original">De: <span id="preco-original" class="preco-original">R$ ${produto.precoOriginal}</span></p>
+                        </div>`;
         }
         const card = `
             <div class="card-produto">
@@ -38,10 +40,14 @@ function renderizarCards(lista) {
                         <img src="${produto.imagemUrl}" class="card-img-top ${produto.plataforma}" alt="Imagem do Produto">
                     </div>
                     <div class="card-body">
-                        <h5 class="card-title">${produto.titulo}</h5>
+                        <h3 class="card-title">${produto.titulo}</h3>
                         ${precoOriginalHtml}
-                        <p class="card-text ">Preco com desconto: ${produto.precoAVista}</p>
-                        <button class="card-button"><a href="${produto.linkAfiliado}" target="_blank">Comprar agora</a></button>
+                        <div class="card-preco-desconto">
+                        <p class="card-text">Por apenas: <span id="preco-desconto">R$ ${produto.precoAVista}</span></p>
+                        </div>
+                        <div class="btn-comprar">
+                            <button class="card-button"><a href="${produto.linkAfiliado}" target="_blank">Ver Promoção</a></button>
+                        </div>
                     </div>
                 </div>
             </div>

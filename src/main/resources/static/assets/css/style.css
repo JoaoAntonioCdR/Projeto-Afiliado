@@ -1,49 +1,13 @@
-*{
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Lilita+One&family=Luckiest+Guy&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-}
-#btn-pesquisa{
-    background-color: #ec60fd;
-    color: #fff;
-    border: 1px solid #a22aaf;
-}
-
-#btn-pesquisa:hover{
-    background-color: #a22aaf;
-    border:2px solid #7d1388;
-}
-#carrosel{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    width: 100vw;
-    height: 30rem;
-}
-#carouselExampleIndicators{
-    width: 80%;
-    height: 80%;
-}
-
-.carousel-inner{
-    border-radius: 25px;
-    width: 100%;
-    height: 100%;
-}
-.carousel-item{
-    width: 100%;
-    height: 100%;
-    margin: 0;
-}
-
-.banner-imagem img{
-    max-width: 100%;
-    height: 100%;
-    object-fit: contain;
+    font-family: Roboto;
 }
 
 #promocoes{
+    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -51,6 +15,7 @@
 
 #titulo-produtos{
     width: auto;
+    font-size: 3rem;
     margin-top: 3rem;
     margin-left: 3rem;
     text-align: center;
@@ -58,7 +23,7 @@
 }
 
 #grid-produtos{
-    width: 100%;
+    margin: 0 .7rem;
     display: grid;
     grid-template-columns: repeat(6, 1fr);
     grid-template-rows: repeat(4, 1fr);
@@ -75,11 +40,13 @@
     background-color: #fff;
 }
 .card{
-    border: 2px solid black;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    border-radius: .8rem;
     display: flex;
+    flex-direction: column;
     align-items: center;
     height: 95%;
-    width: 90%;
+    width: 100%;
     text-align: start;
     background-color: #fff;
 }
@@ -97,45 +64,64 @@
 }
 
 .card-body{
-    border: 1px solid black;
     display: flex;
     flex-direction: column;
-    justify-content: start;
+    justify-content: space-between;
     align-items: flex-start;
     width: 90%;
-    height: 5rem;
+    height: 55%;
     margin-bottom: .8rem;
     position: relative;
 }
 .card-title{
     width: 100%;
-    height: 20%;
+    height: 25%;
     overflow: hidden;
     text-overflow: ellipsis;
+    font-size: 1.1rem;
+    margin-bottom: .5rem;
+    letter-spacing: 1px;
 }
-.card-text{
-    margin: 1rem 0;
-}
-#preco-original{
+.preco-original{
+    color: rgba(44, 44, 44, 0.4);
+    font-weight: 400;
+    font-size: 1.1rem;
     text-decoration-line: line-through;
 }
-
+#preco-original{
+    font-size: 1.2rem;
+    font-weight: 800;
+}
+.card-text{
+    margin: 0.1rem 0;
+    font-size: 1.3rem;
+    font-weight: 400;
+}
+#preco-desconto{
+    font-weight: 500;
+    font-size: 1.4rem;
+    color: #d12020;
+}
+.btn-comprar{
+    width: 100%;
+    text-align: center;
+}
 .card-button{
-    justify-self: center;
-    position: absolute;
-    bottom: 0;
-    width: 95%;
+    width: 100%;
     margin-bottom: .5rem;
     height: 2.8rem;
     text-align: center;
     border-radius: 20px;
     background-color: #ec60fd;
-    border:2px solid #a22aaf;
+    border:2px solid #c629d5;
 }
 
 .card-button:hover{
     background-color: #a22aaf;
     border:2px solid #7d1388;
+}
+.card-button a:hover{
+    color: #d3d3d3;
 }
 .card-button a{
     display: inline-flex;
@@ -143,9 +129,13 @@
     align-items: center;
     width: 100%;
     height: 100%;
+    font-size: 1.2rem;
+    font-weight: 600;
+    letter-spacing: 1.7px;
+    word-spacing: .2rem;
     text-align: center;
     text-decoration: none;
-    color: white;
+    color: #fff;
 }
 .card-image{
     position: relative;

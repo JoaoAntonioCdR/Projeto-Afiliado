@@ -12,7 +12,7 @@ import java.util.Map;
 @Service
 public class N8nService {
 
-    @Value("${n8n.webhook.url}")
+    @Value("${N8N_WEBHOOK_URL}")
     private String apiUrl;
 
     public String enviarLinkParaN8n(String link) {
