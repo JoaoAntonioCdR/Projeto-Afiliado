@@ -204,3 +204,15 @@
     color: var(--white);
     border-color: var(--accent-color);
 }
+
+/* Adicione este código no final de home.css */
+@media (max-width: 767px) {
+    .hero-section {
+        padding: 4rem 1rem; /* Diminui a altura (padding) no mobile */
+        margin-top: 1rem;
+    }
+
+    .section-title {
+        font-size: 1.5rem; /* Diminui o tamanho do título "Nossas Promoções" */
+    }
+}

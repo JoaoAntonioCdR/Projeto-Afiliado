@@ -97,7 +97,7 @@ function renderizarCards(lista) {
             <div class="card-produto">
                 <div class="card">
                     <div class="card-image">
-                        <img src="${produto.imagemUrl}" class="card-img-top" alt="Imagem do Produto">
+                        <img src="${produto.imagemUrl}" class="card-img-top" alt="${produto.titulo}">
                     </div>
                     <div class="card-body">
                         <h3 class="card-title">${produto.titulo}</h3>
@@ -217,6 +217,15 @@ document.addEventListener('DOMContentLoaded', () => {
                     carregarProdutos();
                 }
             }
+        });
+    }
+    const hamburger = document.querySelector('.hamburger');
+    const navMenu = document.querySelector('.main-nav');
+
+    if (hamburger && navMenu) {
+        hamburger.addEventListener('click', () => {
+            // Adiciona ou remove a classe 'is-active' no elemento <nav>
+            navMenu.classList.toggle('is-active');
         });
     }
 

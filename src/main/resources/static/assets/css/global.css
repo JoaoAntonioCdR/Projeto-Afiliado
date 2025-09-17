@@ -42,9 +42,9 @@ body {
 
 .main-header .container {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    flex-wrap: nowrap; /* Permite que os itens quebrem a linha */
+    gap: 2rem;
+    flex-wrap: wrap; /* Correto, permite o ajuste em telas menores */
 }
 
 .logo {
@@ -263,26 +263,26 @@ body {
 
 
 /* --- ESTILOS PARA O MENU MOBILE ATIVO --- */
-.main-nav {
-    position: static;
-}
-
 .main-nav .nav-links {
-    display: none;
+    display: none; /* Escondido por padrão */
     list-style: none;
-    gap: 0;
+    padding: 0;
+    margin: 0;
+
+    /* Estilos para quando o menu estiver aberto */
     position: absolute;
-    top: 74px;
+    top: 93px; /* Altura do seu header, ajuste se necessário */
     left: 0;
-    background-color: white;
+    background-color: var(--dark-color);
     width: 100%;
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    padding: 1rem 0;
+    z-index: 1000;
 }
 
 .main-nav .nav-links li {
-    width: 8rem;
+    width: 100%;
     text-align: center;
+    border-top: 1px solid #4f4f4f;
 }
 
 .main-nav .nav-links a {
@@ -291,8 +291,19 @@ body {
     width: 100%;
 }
 
+/* A classe 'is-active' que o JavaScript vai adicionar para mostrar o menu */
 .main-nav.is-active .nav-links {
     display: block;
+}
+
+/* Garante que o menu hambúrguer só apareça em telas menores */
+.hamburger {
+    display: none; /* Escondido por padrão */
+    font-size: 2rem;
+    color: var(--white); /* Garante que o ícone seja branco */
+    background: none;
+    border: none;
+    cursor: pointer;
 }
 
 /* --- RESPONSIVIDADE GLOBAL --- */
@@ -323,10 +334,10 @@ body {
 }
 
 @media (max-width: 767px) {
-    .main-nav {
-        display: none;
+    .main-nav, .search-bar {
+        display: none; /* Esconde o menu de texto e a busca */
     }
-    .search-bar {
-        display: none;
+    .hamburger {
+        display: block; /* Mostra o ícone do hambúrguer */
     }
 }
