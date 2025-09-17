@@ -1,0 +1,331 @@
+/* --- CONFIGURAÇÕES GLOBAIS E FONTES --- */
+:root {
+    --bg-main: #f7f8fa;
+    --accent-color: #E91E63;
+    --accent-dark: #c2185b;
+    --accent-light: #F8E0E5;
+    --dark-color: #333333;
+    --text-light: #666;
+    --white: #ffffff;
+    --border-color: #eee;
+    --font-family: 'Poppins', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-family);
+    background-color: var(--bg-main);
+    color: var(--dark-color);
+}
+
+.container {
+    width: 90%;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* --- CABEÇALHO --- */
+.main-header {
+    background-color: var(--dark-color); /* Usando o cinza claro do fundo da página */
+    border-bottom: 1px solid var(--border-color); /* Adiciona uma linha sutil para separar */
+    padding: 1rem 0;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.main-header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap; /* Permite que os itens quebrem a linha */
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: var(--dark-color);
+}
+
+.logo-img {
+    height: 60px;
+    margin-right: 10px;
+}
+
+.logo h1 {
+    font-size: 1.5rem;
+    color: var(--white);
+}
+
+.main-nav a {
+    position: relative; /* Essencial para o sublinhado funcionar */
+    text-decoration: none;
+    color: var(--white);
+    font-weight: 500;
+    padding: 0.5rem;
+    transition: color 0.3s ease;
+}
+
+/* Efeito ao passar o mouse */
+.main-nav a:hover {
+    color: #f0f0f0; /* Muda a cor do texto */
+}
+
+/* Cria o sublinhado animado */
+.main-nav a::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background-color: var(--accent-color);
+    bottom: 0;
+    left: 0;
+    transform: scaleX(0); /* Começa com largura 0 */
+    transform-origin: center; /* A animação cresce a partir do centro */
+    transition: transform 0.3s ease-out;
+}
+
+.main-nav a:hover::after {
+    transform: scaleX(1); /* Aumenta a largura para 100% no hover */
+}
+
+.hamburger {
+    display: block;
+    font-size: 1.8rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+/* --- ESTILOS DA BARRA DE BUSCA --- */
+.search-bar {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    max-width: 500px;
+    background-color: #f0f2f5;
+    border-radius: 25px;
+    padding: 5px;
+}
+
+#search-input {
+    border: none;
+    background: transparent;
+    outline: none;
+    width: 100%;
+    padding: 10px 15px;
+    font-size: 1rem;
+    color: var(--dark-color);
+}
+
+#search-button {
+    border: none;
+    background-color: var(--accent-color);
+    color: white;
+    border-radius: 20px;
+    width: 80px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#search-button:hover {
+    background-color: var(--accent-dark);
+}
+
+/* --- RODAPÉ --- */
+.main-footer {
+    background-color: var(--dark-color);
+    color: #bbb;
+    padding: 3rem 0 1rem;
+    margin-top: 2rem;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+}
+
+.footer-column h4 {
+    color: var(--white);
+    margin-bottom: 1rem;
+    position: relative;
+}
+.footer-column h4::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -5px;
+    width: 40px;
+    height: 2px;
+    background-color: var(--accent-color);
+}
+.footer-column ul {
+    list-style: none;
+    padding: 0;
+}
+.footer-column ul li {
+    margin-bottom: 0.5rem;
+}
+.footer-column a {
+    color: #bbb;
+    text-decoration: none;
+}
+.footer-column a:hover {
+    color: var(--white);
+}
+
+.social-links {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+.social-links img {
+    width: 24px;
+    height: 24px;
+}
+
+.copyright {
+    text-align: center;
+    margin-top: 2rem;
+    border-top: 1px solid #555;
+    padding-top: 1rem;
+    font-size: 0.9rem;
+}
+
+/* --- ANÚNCIO FIXO --- */
+.sticky-ad {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    color: var(--white);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.8rem;
+    z-index: 1000;
+}
+
+.ad-text {
+    flex-grow: 1;
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+.close-ad {
+    background: none;
+    border: none;
+    color: var(--white);
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 0 0.5rem;
+}
+
+/* --- BOTÃO FLUTUANTE DO WHATSAPP --- */
+.whatsapp-float-button {
+    position: fixed;
+    width: 60px;
+    height: 60px;
+    bottom: 30px;
+    right: 30px;
+    background-color: #25D366;
+    border-radius: 50%;
+    box-shadow: 2px 2px 8px rgba(0,0,0,0.25);
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.3s ease;
+}
+
+.whatsapp-float-button:hover {
+    transform: scale(1.1);
+}
+
+.whatsapp-float-button img {
+    width: 35px;
+    height: 35px;
+}
+
+
+/* --- ESTILOS PARA O MENU MOBILE ATIVO --- */
+.main-nav {
+    position: static;
+}
+
+.main-nav .nav-links {
+    display: none;
+    list-style: none;
+    gap: 0;
+    position: absolute;
+    top: 74px;
+    left: 0;
+    background-color: white;
+    width: 100%;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    padding: 1rem 0;
+}
+
+.main-nav .nav-links li {
+    width: 100%;
+    text-align: center;
+}
+
+.main-nav .nav-links a {
+    display: block;
+    padding: 1rem;
+    width: 100%;
+}
+
+.main-nav.is-active .nav-links {
+    display: block;
+}
+
+/* --- RESPONSIVIDADE GLOBAL --- */
+@media (min-width: 768px) {
+    .hamburger {
+        display: none;
+    }
+    .main-nav .nav-links {
+        display: flex;
+        position: static;
+        width: auto;
+        box-shadow: none;
+        background-color: transparent;
+        padding: 0;
+        gap: 1.5rem;
+    }
+    .footer-grid {
+        grid-template-columns: 2fr 1fr 1fr;
+    }
+}
+@media (max-width: 992px) {
+    .search-bar {
+        order: 3;
+        width: 100%;
+        max-width: none;
+        margin: 1rem 0 0.5rem;
+    }
+}
+
+@media (max-width: 767px) {
+    .main-nav {
+        display: none;
+    }
+    .search-bar {
+        display: none;
+    }
+}
