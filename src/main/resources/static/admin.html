@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" type="image/png" href="./assets/images/favicon.png">
+        <title>Painel Administrativo</title>
+        <link rel="stylesheet" href="./assets/css/admin.css">
+</head>
+<body>
+<div class="admin-layout">
+    <aside class="sidebar">
+        <h1 class="sidebar-logo">Painel</h1>
+        <nav class="sidebar-nav">
+            <ul>
+                <li><a href="#" class="active">Salvar Produtos</a></li>
+            </ul>
+        </nav>
+        <div class="sidebar-footer">
+            <a href="/">Voltar ao Site</a>
+        </div>
+    </aside>
+
+    <main class="main-content">
+        <section class="content-block">
+            <h2>Enviar Novo Link de Produto</h2>
+            <p>Cole a URL do produto para iniciar o processo de scraping via n8n e adicioná-lo ao banco de dados.</p>
+
+            <div id="feedback-area" class="feedback"></div>
+
+            <form id="link-form">
+                <div class="form-group">
+                    <label for="url-produto">URL do Produto</label>
+                    <input type="url" id="url-produto" placeholder="https://www.mercadolivre.com.br/..." required>
+                </div>
+                <button type="submit" class="btn-submit" onclick="">Enviar</button>
+            </form>
+        </section>
+
+        <section class="content-block">
+            <h2>Observações</h2>
+            <p>- Produtos do Mercado Livre devem ser inseridos somente com o link de afiliado.</p>
+            <p>- Certifique-se de que o link é a URL completa da página do produto.</p>
+            <p>- Evite usar links encurtados ou de campanhas de marketing.</p>
+            <p>- O sistema é otimizado para páginas de produto do Mercado Livre e Magazine Luiza.</p>
+            <p>- Após o envio, o processo de scraping pode levar alguns segundos para ser concluído e o produto aparecer no site principal.</p>
+        </section>
+    </main>
+</div>
+
+<script src="./assets/js/admin.js"></script>
+</body>
+</html>
