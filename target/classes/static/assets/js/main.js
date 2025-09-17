@@ -1,43 +1,103 @@
 const urlApi = '/api';
-let todosOsProdutosParaPesquisa = []; // Guarda produtos para a função de pesquisa
 
-// Função principal que busca os produtos de uma página específica
-async function carregarProdutos(page = 0) {
+// Estado global para guardar os filtros, busca e página
+let currentFilters = {
+    categoria: '',
+    plataforma: '',
+    searchTerm: '',
+    page: 0
+};
+
+// Função para buscar e renderizar filtros dinamicamente
+async function carregarFiltros(filterType, containerId, apiEndpoint) {
+    const container = document.getElementById(containerId);
+    if (!container) return;
+
+    container.innerHTML = `<span class="filter-label">${filterType === 'plataforma' ? 'Lojas:' : 'Categorias:'}</span>`;
+
+    // Botão "Todas" padrão
+    const allButton = document.createElement('button');
+    allButton.classList.add('filter-button', 'active');
+    allButton.dataset.filterType = filterType;
+    allButton.dataset.filterValue = '';
+    allButton.textContent = 'Todas';
+    container.appendChild(allButton);
+
     try {
-        const response = await fetch(`${urlApi}?page=${page}&size=30`);
+        const response = await fetch(`${urlApi}/${apiEndpoint}`);
+        if (!response.ok) {
+            throw new Error(`Erro ao carregar ${filterType}s: ${response.statusText}`);
+        }
+        const items = await response.json();
+
+        items.forEach(item => {
+            const button = document.createElement('button');
+            button.classList.add('filter-button');
+            button.dataset.filterType = filterType;
+            button.dataset.filterValue = item;
+            button.textContent = item;
+            container.appendChild(button);
+        });
+
+    } catch (error) {
+        console.error(`Falha ao carregar ${filterType}s:`, error);
+    }
+}
+
+// Função principal que busca os produtos com base no estado global
+async function carregarProdutos() {
+    // Monta a URL com os parâmetros de filtro, busca e paginação
+    const params = new URLSearchParams({
+        page: currentFilters.page,
+        size: 30
+    });
+
+    if (currentFilters.categoria) params.append('categoria', currentFilters.categoria);
+    if (currentFilters.plataforma) params.append('plataforma', currentFilters.plataforma);
+    if (currentFilters.searchTerm) params.append('searchTerm', currentFilters.searchTerm);
+
+    const grid = document.getElementById('grid-produtos');
+    grid.innerHTML = '<p>Buscando ofertas...</p>';
+
+    try {
+        const response = await fetch(`${urlApi}?${params.toString()}`);
         if (!response.ok) {
             throw new Error(`Erro na API: ${response.statusText}`);
         }
         const data = await response.json();
 
-        // PONTO CRÍTICO: Os produtos agora estão dentro de `data.content`
         renderizarCards(data.content);
         renderizarPaginacao(data.totalPages, data.number);
 
     } catch (error) {
         console.error("Falha ao carregar produtos:", error);
-        document.getElementById('grid-produtos').innerHTML = "<p>Erro ao carregar produtos. Tente novamente mais tarde.</p>";
+        grid.innerHTML = "<p>Erro ao carregar produtos. Tente novamente mais tarde.</p>";
     }
 }
 
-// Sua função de renderizar cards (sem alterações)
+// Função para renderizar os cards dos produtos
 function renderizarCards(lista) {
     const container = document.getElementById('grid-produtos');
     container.innerHTML = "";
+
+    if (lista.length === 0) {
+        container.innerHTML = "<p>Nenhuma oferta encontrada com os filtros selecionados.</p>";
+        return;
+    }
 
     lista.forEach(produtoData => {
         const produto = new ProdutoModel(produtoData);
         let precoOriginalHtml = '';
         if (produto.precoOriginal > 0) {
             precoOriginalHtml = `<div class="card-preco-original">
-                        <p class="preco-original">De: <span id="preco-original" class="preco-original">R$ ${produto.precoOriginal}</span></p>
+                        <p class="preco-original">De: <span class="preco-original-valor">R$ ${produto.precoOriginal}</span></p>
                         </div>`;
         }
         const card = `
             <div class="card-produto">
                 <div class="card">
                     <div class="card-image">
-                        <img src="${produto.imagemUrl}" class="card-img-top ${produto.plataforma}" alt="Imagem do Produto">
+                        <img src="${produto.imagemUrl}" class="card-img-top" alt="Imagem do Produto">
                     </div>
                     <div class="card-body">
                         <h3 class="card-title">${produto.titulo}</h3>
@@ -56,39 +116,110 @@ function renderizarCards(lista) {
     });
 }
 
-// Função NOVA para criar os botões de paginação
+// Função para renderizar a paginação
 function renderizarPaginacao(totalPages, currentPage) {
     const container = document.getElementById('paginacao-container');
     container.innerHTML = '';
 
+    if (totalPages <= 1) return;
+
     const prevPage = currentPage - 1;
     const nextPage = currentPage + 1;
 
-    // Botão Anterior
     container.innerHTML += `<li class="page-item ${currentPage === 0 ? 'disabled' : ''}">
-        <a class="page-link" href="#" onclick="event.preventDefault(); carregarProdutos(${prevPage});">Anterior</a>
+        <a class="page-link" href="#" data-page="${prevPage}">Anterior</a>
     </li>`;
 
-    // Botões de Página
     for (let i = 0; i < totalPages; i++) {
         container.innerHTML += `<li class="page-item ${i === currentPage ? 'active' : ''}">
-            <a class="page-link" href="#" onclick="event.preventDefault(); carregarProdutos(${i});">${i + 1}</a>
+            <a class="page-link" href="#" data-page="${i}">${i + 1}</a>
         </li>`;
     }
 
-    // Botão Próximo
     container.innerHTML += `<li class="page-item ${currentPage === totalPages - 1 ? 'disabled' : ''}">
-        <a class="page-link" href="#" onclick="event.preventDefault(); carregarProdutos(${nextPage});">Próximo</a>
+        <a class="page-link" href="#" data-page="${nextPage}">Próximo</a>
     </li>`;
 }
 
-
-// A função de pesquisa precisa ser adaptada
-async function inicializarPesquisa() {
-    // Para simplificar, a pesquisa buscará apenas na página atual.
-    // Uma pesquisa global exigiria uma nova lógica de backend.
+// Função para resetar visualmente os botões de filtro
+function resetarFiltrosVisuais() {
+    document.querySelectorAll('.filter-button').forEach(btn => {
+        if (btn.dataset.filterValue === '') {
+            btn.classList.add('active');
+        } else {
+            btn.classList.remove('active');
+        }
+    });
 }
 
+// --- LÓGICA DE EVENTOS ---
+document.addEventListener('DOMContentLoaded', () => {
 
-// Carga inicial do site
-carregarProdutos(0);
+    // Carregar filtros dinamicamente
+    carregarFiltros('plataforma', 'plataforma-filters', 'plataformas');
+    carregarFiltros('categoria', 'categoria-filters', 'categorias');
+
+    // Evento de clique nos filtros de categoria/loja
+    const filtersContainer = document.querySelector('.filters-container');
+    if (filtersContainer) {
+        filtersContainer.addEventListener('click', (event) => {
+            if (event.target.classList.contains('filter-button')) {
+                const button = event.target;
+
+                // Limpa a busca ao usar filtros
+                currentFilters.searchTerm = '';
+                const searchInput = document.getElementById('search-input');
+                if (searchInput) searchInput.value = '';
+
+                // Aplica o filtro clicado
+                currentFilters[button.dataset.filterType] = button.dataset.filterValue;
+                currentFilters.page = 0;
+
+                // Atualiza a classe 'active'
+                document.querySelectorAll(`.filter-button[data-filter-type="${button.dataset.filterType}"]`).forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+
+                carregarProdutos();
+            }
+        });
+    }
+
+    // Evento de submit do formulário de busca
+    const searchForm = document.getElementById('search-form');
+    if (searchForm) {
+        searchForm.addEventListener('submit', (event) => {
+            event.preventDefault();
+            const searchInput = document.getElementById('search-input');
+            const searchTerm = searchInput.value.trim();
+
+            // Limpa os filtros de categoria/plataforma ao fazer uma busca
+            currentFilters.categoria = '';
+            currentFilters.plataforma = '';
+            resetarFiltrosVisuais();
+
+            // Atualiza o estado da busca
+            currentFilters.searchTerm = searchTerm;
+            currentFilters.page = 0;
+
+            carregarProdutos();
+        });
+    }
+
+    // Evento de clique na paginação
+    const paginationContainer = document.getElementById('paginacao-container');
+    if(paginationContainer) {
+        paginationContainer.addEventListener('click', (event) => {
+            event.preventDefault();
+            if(event.target.tagName === 'A' && event.target.dataset.page) {
+                const page = parseInt(event.target.dataset.page, 10);
+                if (page >= 0) {
+                    currentFilters.page = page;
+                    carregarProdutos();
+                }
+            }
+        });
+    }
+
+    // Carga inicial dos produtos
+    carregarProdutos();
+});

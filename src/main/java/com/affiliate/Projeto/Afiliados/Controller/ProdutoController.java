@@ -8,9 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 
 import java.util.List;
 
@@ -21,16 +19,20 @@ public class ProdutoController {
     @Autowired
     private ProdutoService produtoService;
 
-    // MÉTODO ATUALIZADO PARA RETORNAR DADOS PAGINADOS
+    // ENDPOINT ATUALIZADO PARA ACEITAR O TERMO DE BUSCA
     @GetMapping
-    public Page<Produto> findAllPaginated(
+    public Page<Produto> findWithFilters(
             @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "30") int size) {
-
+            @RequestParam(defaultValue = "30") int size,
+            @RequestParam(required = false) String categoria,
+            @RequestParam(required = false) String plataforma,
+            @RequestParam(required = false) String searchTerm // NOVO: Parâmetro opcional para busca
+    ) {
         Pageable pageable = PageRequest.of(page, size);
-        return produtoService.findAll(pageable);
+        return produtoService.findWithFilters(categoria, plataforma, searchTerm, pageable);
     }
 
+    // ... outros endpoints (/all, POST, /categorias, /plataformas) ...
     @GetMapping("/all")
     public List<Produto> findAll() {
         return produtoService.findAll();
@@ -41,5 +43,15 @@ public class ProdutoController {
         ModelMapper mapper = new ModelMapper();
         Produto produto = mapper.map(dto, Produto.class);
         return produtoService.save(produto);
+    }
+
+    @GetMapping("/categorias")
+    public List<String> getCategorias() {
+        return produtoService.findDistinctCategorias();
+    }
+
+    @GetMapping("/plataformas")
+    public List<String> getPlataformas() {
+        return produtoService.findDistinctPlataformas();
     }
 }

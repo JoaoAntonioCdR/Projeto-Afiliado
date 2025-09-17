@@ -44,7 +44,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    flex-wrap: wrap; /* Permite que os itens quebrem a linha */
+    flex-wrap: nowrap; /* Permite que os itens quebrem a linha */
 }
 
 .logo {
@@ -143,6 +143,7 @@ body {
     background-color: var(--accent-dark);
 }
 
+
 /* --- RODAPÉ --- */
 .main-footer {
     background-color: var(--dark-color);
@@ -206,13 +207,13 @@ body {
 
 /* --- ANÚNCIO FIXO --- */
 .sticky-ad {
+    display: none;
     position: fixed;
     bottom: 0;
     left: 0;
     width: 100%;
     background-color: rgba(0, 0, 0, 0.9);
     color: var(--white);
-    display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 0.8rem;
@@ -280,7 +281,7 @@ body {
 }
 
 .main-nav .nav-links li {
-    width: 100%;
+    width: 8rem;
     text-align: center;
 }
 
