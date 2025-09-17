@@ -71,8 +71,17 @@
 
 .grid-produtos {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-    gap: 1.5rem;
+    /* Em telas muito pequenas (abaixo de 540px), força 2 colunas */
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem; /* Espaçamento menor no mobile */
+}
+
+/* Em telas maiores, volta ao comportamento automático */
+@media (min-width: 540px) {
+    .grid-produtos {
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+        gap: 1.5rem;
+    }
 }
 
 /* ESTILOS DOS CARDS */

@@ -43,15 +43,15 @@ body {
 .main-header .container {
     display: flex;
     align-items: center;
-    gap: 2rem;
-    flex-wrap: wrap; /* Correto, permite o ajuste em telas menores */
+    gap: 1.5rem; /* Espaçamento ligeiramente menor */
+    flex-wrap: nowrap;
 }
 
 .logo {
     display: flex;
     align-items: center;
     text-decoration: none;
-    color: var(--dark-color);
+    color: var(--white);
 }
 
 .logo-img {
@@ -108,11 +108,12 @@ body {
 .search-bar {
     display: flex;
     align-items: center;
-    width: 100%;
-    max-width: 500px;
+    flex-grow: 1; /* Permite que a barra ocupe o espaço disponível */
+    max-width: 600px;
     background-color: #f0f2f5;
     border-radius: 25px;
     padding: 5px;
+    margin: 0 auto; /* Ajuda na centralização em telas largas */
 }
 
 #search-input {
@@ -334,8 +335,11 @@ body {
 }
 
 @media (max-width: 767px) {
-    .main-nav, .search-bar {
-        display: none; /* Esconde o menu de texto e a busca */
+    .main-nav .nav-links {
+        display: none; /* AQUI ESTÁ A MUDANÇA: Esconde apenas a lista de links */
+    }
+    .search-bar {
+        display: none; /* Mantém a busca escondida */
     }
     .hamburger {
         display: block; /* Mostra o ícone do hambúrguer */
