@@ -1,3 +1,14 @@
+function formatarMoeda(valor) {
+    if (valor === null || isNaN(valor)) {
+        return "R$ 0,00"; // Retorna um valor padrão se o número for inválido
+    }
+    // Usa a API de internacionalização do JavaScript para formatar a moeda
+    return new Intl.NumberFormat('pt-BR', {
+        style: 'currency',
+        currency: 'BRL'
+    }).format(valor);
+}
+
 const urlApi = '/api';
 
 // Estado global para guardar os filtros, busca e página
@@ -76,6 +87,7 @@ async function carregarProdutos() {
 }
 
 // Função para renderizar os cards dos produtos
+// Substitua sua função renderizarCards por esta versão
 function renderizarCards(lista) {
     const container = document.getElementById('grid-produtos');
     container.innerHTML = "";
@@ -88,11 +100,14 @@ function renderizarCards(lista) {
     lista.forEach(produtoData => {
         const produto = new ProdutoModel(produtoData);
         let precoOriginalHtml = '';
+
+        // A formatação é aplicada aqui
         if (produto.precoOriginal > 0) {
             precoOriginalHtml = `<div class="card-preco-original">
-                        <p class="preco-original">De: <span class="preco-original-valor">R$ ${produto.precoOriginal}</span></p>
+                        <p class="preco-original">De: <span class="preco-original-valor">${formatarMoeda(produto.precoOriginal)}</span></p>
                         </div>`;
         }
+
         const card = `
             <div class="card-produto">
                 <div class="card">
@@ -103,7 +118,7 @@ function renderizarCards(lista) {
                         <h3 class="card-title">${produto.titulo}</h3>
                         ${precoOriginalHtml}
                         <div class="card-preco-desconto">
-                        <p class="card-text">Por apenas: <span id="preco-desconto">R$ ${produto.precoAVista}</span></p>
+                        <p class="card-text">Por apenas: <span id="preco-desconto">${formatarMoeda(produto.precoAVista)}</span></p>
                         </div>
                         <div class="btn-comprar">
                             <button class="card-button"><a href="${produto.linkAfiliado}" target="_blank">Ver Promoção</a></button>

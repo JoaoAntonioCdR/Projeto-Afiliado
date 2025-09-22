@@ -31,10 +31,9 @@ body {
 
 /* --- CABEÇALHO --- */
 .main-header {
-    background-color: var(--dark-color); /* Usando o cinza claro do fundo da página */
-    border-bottom: 1px solid var(--border-color); /* Adiciona uma linha sutil para separar */
-    padding: 1rem 0;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    background-color: var(--dark-color);
+    border-bottom: 1px solid #4f4f4f; /* Borda sutil */
+    padding: 0.75rem 0; /* Mais compacto */
     position: sticky;
     top: 0;
     z-index: 100;
@@ -43,8 +42,8 @@ body {
 .main-header .container {
     display: flex;
     align-items: center;
-    gap: 1.5rem; /* Espaçamento ligeiramente menor */
-    flex-wrap: nowrap;
+    gap: 1.5rem;
+    flex-wrap: nowrap; /* Impede a quebra de linha */
 }
 
 .logo {
@@ -52,68 +51,29 @@ body {
     align-items: center;
     text-decoration: none;
     color: var(--white);
+    flex-shrink: 0; /* Impede que o logo encolha */
 }
 
 .logo-img {
-    height: 60px;
+    height: 48px;
     margin-right: 10px;
 }
 
-.logo h1 {
-    font-size: 1.5rem;
+.logo h2 { /* Usando H2 para SEO, conforme discutido */
+    font-size: 1.25rem;
     color: var(--white);
+    white-space: nowrap;
 }
 
-.main-nav a {
-    position: relative; /* Essencial para o sublinhado funcionar */
-    text-decoration: none;
-    color: var(--white);
-    font-weight: 500;
-    padding: 0.5rem;
-    transition: color 0.3s ease;
-}
-
-/* Efeito ao passar o mouse */
-.main-nav a:hover {
-    color: #f0f0f0; /* Muda a cor do texto */
-}
-
-/* Cria o sublinhado animado */
-.main-nav a::after {
-    content: '';
-    position: absolute;
-    width: 100%;
-    height: 2px;
-    background-color: var(--accent-color);
-    bottom: 0;
-    left: 0;
-    transform: scaleX(0); /* Começa com largura 0 */
-    transform-origin: center; /* A animação cresce a partir do centro */
-    transition: transform 0.3s ease-out;
-}
-
-.main-nav a:hover::after {
-    transform: scaleX(1); /* Aumenta a largura para 100% no hover */
-}
-
-.hamburger {
-    display: block;
-    font-size: 1.8rem;
-    background: none;
-    border: none;
-    cursor: pointer;
-}
-
-/* --- ESTILOS DA BARRA DE BUSCA --- */
 .search-bar {
     display: flex;
     align-items: center;
-    flex-grow: 1; /* Permite que a barra ocupe o espaço disponível */
-    max-width: 600px;
+    flex-grow: 1;
+    max-width: 700px;
     background-color: #f0f2f5;
     border-radius: 25px;
     padding: 5px;
-    margin: 0 auto; /* Ajuda na centralização em telas largas */
+    margin: 0 auto;
 }
 
 #search-input {
@@ -131,8 +91,9 @@ body {
     background-color: var(--accent-color);
     color: white;
     border-radius: 20px;
-    width: 80px;
+    width: 60px;
     height: 40px;
+    flex-shrink: 0;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -144,6 +105,58 @@ body {
     background-color: var(--accent-dark);
 }
 
+.main-nav {
+    flex-shrink: 0;
+}
+
+.main-nav .nav-links {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    gap: 1.5rem;
+}
+
+.main-nav a {
+    position: relative;
+    text-decoration: none;
+    color: var(--white);
+    font-weight: 500;
+    padding-bottom: 5px;
+    transition: color 0.3s ease;
+    white-space: nowrap;
+}
+
+.main-nav a:hover {
+    color: #f0f0f0;
+}
+
+.main-nav a::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background-color: var(--accent-color);
+    bottom: 0;
+    left: 0;
+    transform: scaleX(0);
+    transform-origin: center;
+    transition: transform 0.3s ease-out;
+}
+
+.main-nav a:hover::after {
+    transform: scaleX(1);
+}
+
+.hamburger {
+    display: none;
+    font-size: 2rem;
+    color: var(--white);
+    background: none;
+    border: none;
+    cursor: pointer;
+    margin-left: auto;
+}
 
 /* --- RODAPÉ --- */
 .main-footer {
@@ -262,86 +275,61 @@ body {
     height: 35px;
 }
 
+/* --- RESPONSIVIDADE GLOBAL E MENU MOBILE --- */
 
-/* --- ESTILOS PARA O MENU MOBILE ATIVO --- */
-.main-nav .nav-links {
-    display: none; /* Escondido por padrão */
-    list-style: none;
-    padding: 0;
-    margin: 0;
-
-    /* Estilos para quando o menu estiver aberto */
-    position: absolute;
-    top: 93px; /* Altura do seu header, ajuste se necessário */
-    left: 0;
-    background-color: var(--dark-color);
-    width: 100%;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    z-index: 1000;
-}
-
-.main-nav .nav-links li {
-    width: 100%;
-    text-align: center;
-    border-top: 1px solid #4f4f4f;
-}
-
-.main-nav .nav-links a {
-    display: block;
-    padding: 1rem;
-    width: 100%;
-}
-
-/* A classe 'is-active' que o JavaScript vai adicionar para mostrar o menu */
-.main-nav.is-active .nav-links {
-    display: block;
-}
-
-/* Garante que o menu hambúrguer só apareça em telas menores */
-.hamburger {
-    display: none; /* Escondido por padrão */
-    font-size: 2rem;
-    color: var(--white); /* Garante que o ícone seja branco */
-    background: none;
-    border: none;
-    cursor: pointer;
-}
-
-/* --- RESPONSIVIDADE GLOBAL --- */
 @media (min-width: 768px) {
-    .hamburger {
-        display: none;
-    }
-    .main-nav .nav-links {
-        display: flex;
-        position: static;
-        width: auto;
-        box-shadow: none;
-        background-color: transparent;
-        padding: 0;
-        gap: 1.5rem;
-    }
     .footer-grid {
         grid-template-columns: 2fr 1fr 1fr;
     }
 }
-@media (max-width: 992px) {
+
+@media (max-width: 1024px) {
+    .main-nav {
+        display: none;
+    }
+    .hamburger {
+        display: block;
+    }
     .search-bar {
-        order: 3;
+        max-width: 500px;
+    }
+
+    /* Regras para o menu mobile quando ele estiver aberto */
+    .main-nav.is-active {
+        display: block;
+        position: absolute;
+        top: 71px; /* Altura do header */
+        left: 0;
         width: 100%;
-        max-width: none;
-        margin: 1rem 0 0.5rem;
+        background-color: var(--dark-color);
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        z-index: 1000;
+    }
+    .main-nav.is-active .nav-links {
+        flex-direction: column;
+        width: 100%;
+        gap: 0;
+    }
+    .main-nav.is-active .nav-links li {
+        width: 100%;
+        text-align: center;
+        border-top: 1px solid #4f4f4f;
+    }
+    .main-nav.is-active .nav-links a {
+        display: block;
+        padding: 1rem;
+        width: 100%;
     }
 }
 
 @media (max-width: 767px) {
-    .main-nav .nav-links {
-        display: none; /* AQUI ESTÁ A MUDANÇA: Esconde apenas a lista de links */
-    }
     .search-bar {
-        display: none; /* Mantém a busca escondida */
+        display: none;
     }
-    .hamburger {
-        display: block; /* Mostra o ícone do hambúrguer */
+    .logo h2 {
+        display: none;
+    }
+    .main-header .container {
+        justify-content: space-between;
     }
 }

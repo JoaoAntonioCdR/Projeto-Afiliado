@@ -1,7 +1,7 @@
 /* --- SEÇÃO HERO --- */
 .hero-section {
     text-align: center;
-    padding: 10rem 1rem;
+    padding: 8rem 1rem; /* Altura padrão */
     border-radius: 10px;
     margin-top: 2rem;
     background-size: cover;
@@ -21,6 +21,7 @@
 }
 
 /* --- FILTROS --- */
+/* (Suas regras de filtro permanecem as mesmas) */
 .filters-container {
     display: flex;
     flex-direction: column;
@@ -31,19 +32,16 @@
     border-radius: 8px;
     border: 1px solid var(--border-color);
 }
-
 .filter-group {
     display: flex;
     align-items: center;
     flex-wrap: wrap;
     gap: 0.5rem;
 }
-
 .filter-label {
     font-weight: 500;
     margin-right: 1rem;
 }
-
 .filter-button {
     padding: 0.5rem 1rem;
     border: 1px solid var(--border-color);
@@ -55,13 +53,10 @@
     font-size: 0.9rem;
     transition: all 0.3s ease;
 }
-
 .filter-button:hover {
     background-color: var(--accent-light);
     border-color: var(--accent-color);
 }
-
-/* Estilo do botão de filtro ativo */
 .filter-button.active {
     background-color: var(--accent-color);
     color: var(--white);
@@ -69,22 +64,14 @@
     font-weight: 500;
 }
 
+
+/* --- GRADE DE PRODUTOS E CARDS --- */
 .grid-produtos {
     display: grid;
-    /* Em telas muito pequenas (abaixo de 540px), força 2 colunas */
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1rem; /* Espaçamento menor no mobile */
+    grid-template-columns: 1fr; /* Padrão mobile: 1 coluna */
+    gap: 1rem;
 }
 
-/* Em telas maiores, volta ao comportamento automático */
-@media (min-width: 540px) {
-    .grid-produtos {
-        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-        gap: 1.5rem;
-    }
-}
-
-/* ESTILOS DOS CARDS */
 .card-produto {
     background-color: var(--white);
     border: 1px solid var(--border-color);
@@ -128,10 +115,10 @@
 }
 
 .card-title {
-    font-size: 1rem;
+    font-size: 0.9rem;
     font-weight: 500;
     line-height: 1.4;
-    height: 4.2em;
+    height: 2.8em; /* Limita a 2 linhas */
     overflow: hidden;
     text-overflow: ellipsis;
     margin-bottom: 0.5rem;
@@ -182,18 +169,17 @@
 }
 
 /* PAGINAÇÃO */
+/* (Suas regras de paginação permanecem as mesmas) */
 .pagination-wrapper {
     display: flex;
     justify-content: center;
     margin-top: 3rem;
 }
-
 .pagination {
     display: flex;
     list-style: none;
     gap: 0.5rem;
 }
-
 .page-item .page-link {
     padding: 0.5rem 1rem;
     border: 1px solid var(--border-color);
@@ -202,26 +188,38 @@
     color: var(--accent-color);
     background-color: var(--white);
 }
-
 .page-item.disabled .page-link {
     color: #ccc;
     pointer-events: none;
 }
-
 .page-item.active .page-link {
     background-color: var(--accent-color);
     color: var(--white);
     border-color: var(--accent-color);
 }
 
-/* Adicione este código no final de home.css */
+
+/* --- RESPONSIVIDADE DA PÁGINA INICIAL --- */
+@media (min-width: 480px) {
+    .grid-produtos {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 768px) {
+    .grid-produtos {
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+        gap: 1.5rem;
+    }
+}
+
 @media (max-width: 767px) {
     .hero-section {
-        padding: 4rem 1rem; /* Diminui a altura (padding) no mobile */
+        padding: 4rem 1rem;
         margin-top: 1rem;
     }
 
     .section-title {
-        font-size: 1.5rem; /* Diminui o tamanho do título "Nossas Promoções" */
+        font-size: 1.5rem;
     }
 }
