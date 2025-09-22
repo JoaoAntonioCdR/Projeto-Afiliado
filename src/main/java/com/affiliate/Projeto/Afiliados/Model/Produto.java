@@ -16,8 +16,7 @@ public class Produto {
     private String titulo;
     private BigDecimal precoOriginal;
     private BigDecimal precoAVista;
-    private BigDecimal parcelamentoPreco;
-    private String parcelamentoTexto;
+    private String parcelamento;
     private String categoria;
     private String imagemUrl;
     private String plataforma;
@@ -29,12 +28,11 @@ public class Produto {
     public Produto() {
     }
 
-    public Produto(String titulo, BigDecimal precoOriginal, BigDecimal precoAVista, BigDecimal parcelamentoPreco, String categoria, String parcelamentoTexto,String plataforma, String linkAfiliado, String imagemUrl, String descricao) {
+    public Produto(String titulo, BigDecimal precoOriginal, BigDecimal precoAVista, String categoria, String parcelamento,String plataforma, String linkAfiliado, String imagemUrl, String descricao) {
         this.titulo = titulo;
         this.precoOriginal = precoOriginal;
         this.precoAVista = precoAVista;
-        this.parcelamentoPreco = parcelamentoPreco;
-        this.parcelamentoTexto = parcelamentoTexto;
+        this.parcelamento = parcelamento;
         this.plataforma = plataforma;
         this.categoria = categoria;
         this.linkAfiliado = linkAfiliado;
@@ -74,28 +72,20 @@ public class Produto {
         this.precoAVista = precoAVista;
     }
 
-    public String getParcelamentoTexto() {
-        return parcelamentoTexto;
-    }
-
-    public void setParcelamentoTexto(String parcelamentoTexto) {
-        this.parcelamentoTexto = parcelamentoTexto;
-    }
-
     public String getCategoria() {
         return categoria;
     }
 
+    public String getParcelamento() {
+        return parcelamento;
+    }
+
+    public void setParcelamento(String parcelamento) {
+        this.parcelamento = parcelamento;
+    }
+
     public void setCategoria(String categoria) {
         this.categoria = categoria;
-    }
-
-    public BigDecimal getParcelamentoPreco() {
-        return parcelamentoPreco;
-    }
-
-    public void setParcelamentoPreco(BigDecimal parcelamentoPreco) {
-        this.parcelamentoPreco = parcelamentoPreco;
     }
 
     public String getImagemUrl() {
