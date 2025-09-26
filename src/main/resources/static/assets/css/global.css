@@ -326,9 +326,6 @@ body {
     .search-bar {
         display: none;
     }
-    .logo h2 {
-        display: none;
-    }
     .main-header .container {
         justify-content: space-between;
     }
