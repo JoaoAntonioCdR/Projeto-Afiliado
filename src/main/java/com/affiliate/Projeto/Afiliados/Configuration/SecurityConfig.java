@@ -19,6 +19,7 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
+                .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
                         // Exige que o usuário tenha a role "ADMIN" para acessar /admin.html
                         .requestMatchers("/admin.html").hasRole("ADMIN")
