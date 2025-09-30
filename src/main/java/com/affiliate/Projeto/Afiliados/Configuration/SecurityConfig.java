@@ -27,7 +27,6 @@ public class SecurityConfig {
                 )
                 .formLogin(form -> form
                         // O Spring gera uma página de login padrão em /login
-                        .loginPage("/login")
                         // Redireciona para /admin.html após o login bem-sucedido
                         .defaultSuccessUrl("/admin.html", true)
                         .permitAll()
