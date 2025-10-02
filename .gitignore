@@ -1,0 +1,6 @@
+# Ignorar arquivos de segredos e variáveis de ambiente
+.env
+
+# Ignorar arquivos compilados e logs do Maven/Java
+/target/
+*.log
