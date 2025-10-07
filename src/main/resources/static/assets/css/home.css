@@ -1,12 +1,41 @@
-/* --- SEÇÃO HERO --- */
-.hero-section {
-    text-align: center;
-    padding: 8rem 1rem; /* Altura padrão */
-    border-radius: 10px;
-    margin-top: 2rem;
-    background-size: cover;
-    background-position: center;
-    color: var(--white);
+/* ============================================= */
+/* CSS PARA O BANNER PROMOCIONAL RESPONSIVO      */
+/* ============================================= */
+
+.promo-banner-container {
+    /* Controla o espaçamento do banner na página */
+    margin: 40px 0;
+    padding: 0 10px; /* Adiciona um pequeno respiro nas laterais em telas muito pequenas */
+}
+
+.promo-banner-container a {
+    /* Faz o link se comportar como um bloco para conter a imagem */
+    display: block;
+    text-decoration: none; /* Remove o sublinhado padrão do link */
+
+    /* Efeito visual opcional */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 12px; /* Bordas arredondadas para um visual moderno */
+    overflow: hidden; /* Garante que a imagem respeite as bordas arredondadas */
+}
+
+.promo-banner-container a:hover {
+    /* Efeito de "levantar" o banner ao passar o mouse, chamando atenção */
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.promo-banner-container img {
+    /* A PARTE MAIS IMPORTANTE DA SOLUÇÃO */
+
+    /* Faz a imagem ocupar toda a largura do seu container pai */
+    width: 100%;
+
+    /* A altura se ajusta automaticamente para manter a proporção original da imagem */
+    height: auto;
+
+    /* Remove qualquer espaço extra que o navegador possa adicionar abaixo da imagem */
+    display: block;
 }
 
 /* --- SEÇÃO DE PRODUTOS --- */
@@ -214,10 +243,6 @@
 }
 
 @media (max-width: 767px) {
-    .hero-section {
-        padding: 4rem 1rem;
-        margin-top: 1rem;
-    }
 
     .section-title {
         font-size: 1.5rem;
