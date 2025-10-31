@@ -1,0 +1,24 @@
+# Ignora o diretório do Git
+.git
+.gitignore
+
+# Ignora diretórios de build local, pois o build será feito DENTRO do contêiner
+target/
+.mvn/
+
+# Ignora arquivos e pastas de IDEs
+.idea/
+*.iml
+.vscode/
+
+# Ignora arquivos de log e do sistema operacional
+*.log
+.DS_Store
+node_modules/
+
+.env
+.vscode/
+
+scraper-shopee/node_modules/
+# Ignora logs de debug do npm
+npm-debug.log

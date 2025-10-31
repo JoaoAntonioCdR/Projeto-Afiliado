@@ -1,5 +1,6 @@
 package com.affiliate.Projeto.Afiliados.Service;
 
+import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
@@ -54,6 +55,29 @@ public class N8nService {
 
         } catch (HttpClientErrorException e) {
             // Este erro é útil para ver falhas de autenticação (401)
+            System.err.println("Erro na requisição para o n8n: " + e.getStatusCode());
+            System.err.println("Corpo do Erro: " + e.getResponseBodyAsString());
+            return "Erro ao se comunicar com o n8n: " + e.getStatusCode();
+        }
+    }
+    public String enviarDadosParaN8n(Map<String, Object> data) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.set(n8nHeaderName, n8nSecretValue);
+
+        // Converte o Map de dados para uma String JSON
+        Gson gson = new Gson();
+        String jsonBody = gson.toJson(data);
+
+        HttpEntity<String> entity = new HttpEntity<>(jsonBody, headers);
+
+        RestTemplate restTemplate = new RestTemplate();
+
+        try {
+            ResponseEntity<String> response = restTemplate.exchange(apiUrl, HttpMethod.POST, entity, String.class);
+            System.out.println("Dados enviados para o n8n com sucesso. Status: " + response.getStatusCode());
+            return response.getBody();
+        } catch (HttpClientErrorException e) {
             System.err.println("Erro na requisição para o n8n: " + e.getStatusCode());
             System.err.println("Corpo do Erro: " + e.getResponseBodyAsString());
             return "Erro ao se comunicar com o n8n: " + e.getStatusCode();
